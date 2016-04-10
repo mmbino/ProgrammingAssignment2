@@ -3,7 +3,7 @@
 
 ## Create  a  function which creates a  matrix  which stores inverse  in cache so that  when it is seond  time the value  is  retrieved  from the  
 # and give the associated  funtions to  set  and retrieve value
-makeMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(x = matrix()) {
         matinv <- NULL  
         set <- function(y) {                      
                 x <<- y
@@ -15,16 +15,14 @@ makeMatrix <- function(x = matrix()) {
         # gets the inverse     
         getinverse <- function() matinv        
         ## passes the value of the function makeCacheMatrix        
-        list(set = set, get = get,                    
-             setinverse = setinverse,
-             getinverse = getinverse)
+        list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
         
 }
 
 
-## Function  to retrieve  
+## Function  to retrieve cached  inverse matrix 
 
-cacheMatrix <- function(x, ...) {
+cacheSolve<- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
         matinv <- x$getinverse()
         
@@ -32,7 +30,7 @@ cacheMatrix <- function(x, ...) {
                 message("getting cached data - Inverse of the matrix")
                 return(matinv)
         }
-        
+       #  if  not available in cache  compute  inverse  
         data <- x$get()  
         matinv <- solve(data, ...)
         x$setinverse(matinv)
